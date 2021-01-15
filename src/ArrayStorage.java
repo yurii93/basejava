@@ -1,26 +1,27 @@
-import java.util.Arrays;
-import java.util.Objects;
+
 
 /**
  * Array based storage for Resumes
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    int size = 0;
 
     void clear() {
-        int storageSize = size();
-        for (int i = 0; i < storageSize; i++) {
+        for (int i = 0; i < size; i++) {
             storage[i] = null;
         }
+        size = 0;
     }
 
     void save(Resume r) {
-        storage[size()] = r;
+        storage[size] = r;
+        size++;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < size(); i++) {
-            if (storage[i].uuid.equals(uuid)) {
+        for (int i = 0; i < size; i++) {
+            if (uuid == storage[i].uuid) {
                 return storage[i];
             }
         }
@@ -28,16 +29,12 @@ public class ArrayStorage {
     }
 
     void delete(String uuid) {
-        int storageSize = size();
-
-        if (storageSize >= 1) {
-            for (int i = 0; i < storageSize; i++) {
-                if (storage[i].uuid.equals(uuid)) {
-                    storage[i] = null;
-                    System.arraycopy(storage, i + 1, storage, i, storageSize - i);
-                    storage[storageSize - i - 1] = null;
-                    break;
-                }
+        for (int i = 0; i < size; i++) {
+            if (uuid == storage[i].uuid) {
+                storage[i] = storage[size - 1];
+                storage[size - 1] = null;
+                size--;
+                break;
             }
         }
     }
@@ -46,18 +43,14 @@ public class ArrayStorage {
      * @return array, contains only Resumes in storage (without null)
      */
     Resume[] getAll() {
-        return Arrays.copyOf(storage, size());
+        Resume[] result = new Resume[size];
+        for (int i = 0; i < size; i++) {
+            result[i] = storage[i];
+        }
+        return result;
     }
 
     int size() {
-        int size = 0;
-        for (Resume resume : storage) {
-            if (Objects.isNull(resume)) {
-                break;
-            } else {
-                size++;
-            }
-        }
         return size;
     }
 }

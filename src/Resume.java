@@ -4,7 +4,7 @@
 public class Resume {
 
     // Unique identifier
-    public String uuid;
+    String uuid;
 
     @Override
     public String toString() {
