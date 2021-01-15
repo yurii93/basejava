@@ -14,9 +14,6 @@ public class ArrayStorage {
 
     public void clear() {
         Arrays.fill(storage, null);
-        /*for (int i = 0; i < size; i++) {
-            storage[i] = null;
-        }*/
         size = 0;
     }
 
@@ -48,9 +45,8 @@ public class ArrayStorage {
         if (!ifExistsIndex(elemIndex)) {
             System.out.println("Resume doesn't exist!");
             return null;
-        } else {
-            return storage[elemIndex];
         }
+        return storage[elemIndex];
     }
 
     public void delete(String uuid) {
