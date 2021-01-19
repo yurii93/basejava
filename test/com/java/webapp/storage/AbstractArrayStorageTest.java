@@ -104,4 +104,13 @@ public abstract class AbstractArrayStorageTest {
         }
         storage.save(new Resume());
     }
+
+    @Test
+    public void storageOverflowAheadOfTime() {
+        int storageLimit = AbstractArrayStorage.STORAGE_LIMIT - storage.size();
+        for (int i = 0; i < storageLimit; i++) {
+            storage.save(new Resume());
+            Assert.fail("Storage overflow ahead of time");
+        }
+    }
 }
