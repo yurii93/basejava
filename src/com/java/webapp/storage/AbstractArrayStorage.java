@@ -1,6 +1,9 @@
-package com.urise.webapp.storage;
+package com.java.webapp.storage;
 
-import com.urise.webapp.model.Resume;
+import com.java.webapp.exception.ExistStorageException;
+import com.java.webapp.exception.NotExistStorageException;
+import com.java.webapp.exception.StorageException;
+import com.java.webapp.model.Resume;
 
 import java.util.Arrays;
 
@@ -23,7 +26,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(resume.getUuid());
 
         if (index < 0) {
-            System.out.println("Resume doesn't exist!");
+            throw new NotExistStorageException(resume.getUuid());
         } else {
             storage[index] = resume;
         }
@@ -31,11 +34,11 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public void save(Resume resume) {
         int index = getIndex(resume.getUuid());
-        System.out.println(index);
+
         if (index >= 0) {
-            System.out.println("Resume already exists!");
+            throw new ExistStorageException(resume.getUuid());
         } else if (size == storage.length) {
-            System.out.println("Storage is already filled!");
+            throw new StorageException("Storage is already filled!", resume.getUuid());
         } else {
             insertElement(resume, index);
             size++;
@@ -46,7 +49,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println("Resume doesn't exist! Nothing to delete!");
+            throw new NotExistStorageException(uuid);
         } else {
             fillDeletedElement(index);
             storage[size - 1] = null;
@@ -58,8 +61,7 @@ public abstract class AbstractArrayStorage implements Storage {
         int index = getIndex(uuid);
 
         if (index < 0) {
-            System.out.println("Resume doesn't exist!");
-            return null;
+            throw new NotExistStorageException(uuid);
         }
         return storage[index];
     }

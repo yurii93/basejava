@@ -1,9 +1,11 @@
-package com.urise.webapp.storage;
+package com.java.webapp.storage;
 
-import com.urise.webapp.model.Resume;
-
+import com.java.webapp.model.Resume;
 import java.util.Arrays;
 
+/**
+ * Sorted array storage for Resumes
+ */
 public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
@@ -25,8 +27,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int getIndex(String uuid) {
-        Resume searchKeyObj = new Resume();
-        searchKeyObj.setUuid(uuid);
+        Resume searchKeyObj = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKeyObj);
     }
 }
