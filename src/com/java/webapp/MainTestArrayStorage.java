@@ -1,14 +1,13 @@
 package com.java.webapp;
 
 import com.java.webapp.model.Resume;
-import com.java.webapp.storage.AbstractStorage;
-import com.java.webapp.storage.MapUuidStorage;
+import com.java.webapp.storage.ArrayStorage;
 
 /**
  * Test ru.javawebinar.basejava.storage.ArrayStorage
  */
 public class MainTestArrayStorage {
-    static final AbstractStorage ARRAY_STORAGE = new MapUuidStorage();
+    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume("uuid1", "Name1");
