@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class MainFile {
     public static void main(String[] args) {
@@ -36,5 +38,22 @@ public class MainFile {
             throw new RuntimeException("Error", e);
         }
 
+        File baseDir = new File(".\\src");
+        printDirectoryRecursively(baseDir, 0);
+    }
+
+    private static void printDirectoryRecursively(File directory, int offset) {
+
+        String offsetSpace = " ";
+        String spaceRepeated = IntStream.range(0, offset).mapToObj(i -> offsetSpace).collect(Collectors.joining(""));
+
+        for (File file : Objects.requireNonNull(directory.listFiles())) {
+            if (file.isDirectory()) {
+                System.out.println(spaceRepeated + "== " + file.getName() + " ==");
+                printDirectoryRecursively(file, offset + 2);
+            } else {
+                System.out.println(spaceRepeated + "-" + file.getName());
+            }
+        }
     }
 }
