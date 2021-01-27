@@ -7,13 +7,16 @@ import com.java.webapp.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
+
+    protected static final File STORAGE_DIR = new File("C:\\Users\\Юрий\\IdeaProjects\\basejava\\storage");
+
     protected Storage storage;
 
     private static final String UUID_1 = "uuid1";
@@ -31,11 +34,6 @@ public abstract class AbstractStorageTest {
         R2 = ResumeTestData.createTestResume(UUID_2, "Ivan Petrov");
         R3 = ResumeTestData.createTestResume(UUID_3, "Vasyl Gigienko");
         R4 = ResumeTestData.createTestResume(UUID_4, "Yurii Grechko");
-
-        /*R1 = new Resume(UUID_1, "Ivan Ivanov");
-        R2 = new Resume(UUID_2, "Petro Sidorov");
-        R3 = new Resume(UUID_3, "Petya Nikulin");
-        R4 = new Resume(UUID_4, "Petrovich");*/
     }
 
     protected AbstractStorageTest(Storage storage) {
@@ -65,7 +63,7 @@ public abstract class AbstractStorageTest {
     public void update() {
         Resume newResume = ResumeTestData.createTestResume(UUID_1, "Pavel Sidorovich");
         storage.update(newResume);
-        assertSame(newResume, storage.get(UUID_1));
+        assertTrue(newResume.equals(storage.get(UUID_1)));
     }
 
     @Test(expected = NotExistStorageException.class)
