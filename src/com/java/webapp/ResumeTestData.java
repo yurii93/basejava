@@ -1,14 +1,15 @@
 package com.java.webapp;
 
+import com.java.webapp.model.ContactType;
 import com.java.webapp.model.Resume;
 
 public class ResumeTestData {
 
     public static Resume createTestResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
-        /*resume.addContact(ContactType.MAIL, "mail1@ya.ru");
+        resume.addContact(ContactType.MAIL, "mail1@ya.ru");
         resume.addContact(ContactType.PHONE, "11111");
-        resume.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
+        /*resume.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
         resume.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
         resume.addSection(SectionType.ACHIEVEMENT, new ListSection("Achivment11", "Achivment12", "Achivment13"));
         resume.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "SQL", "JavaScript"));
@@ -26,8 +27,7 @@ public class ResumeTestData {
         resume.addSection(SectionType.EXPERIENCE,
                 new OrganizationSection(
                         new Organization("Organization2", "http://Organization2.ru",
-                                new Organization.Position(2015, Month.JANUARY, "position1", "content1"))));
-*/
+                                new Organization.Position(2015, Month.JANUARY, "position1", "content1"))));*/
         return resume;
     }
 }
