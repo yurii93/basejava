@@ -12,33 +12,15 @@ import org.junit.Test;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
+import static com.java.webapp.ResumeTestData.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
 
-    protected static final File STORAGE_DIR = Config.get().getStorageDir();
-
+    static final File STORAGE_DIR = Config.get().getStorageDir();
     protected Storage storage;
-
-    private static final String UUID_1 = UUID.randomUUID().toString();
-    private static final String UUID_2 = UUID.randomUUID().toString();
-    private static final String UUID_3 = UUID.randomUUID().toString();
-    private static final String UUID_4 = UUID.randomUUID().toString();
-
-    private static final Resume R1;
-    private static final Resume R2;
-    private static final Resume R3;
-    private static final Resume R4;
-
-    static {
-        R1 = ResumeTestData.createTestResume(UUID_1, "Alex Sidorov");
-        R2 = ResumeTestData.createTestResume(UUID_2, "Ivan Petrov");
-        R3 = ResumeTestData.createTestResume(UUID_3, "Vasyl Gigienko");
-        R4 = ResumeTestData.createTestResume(UUID_4, "Yurii Grechko");
-    }
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
